@@ -1,0 +1,11 @@
+{
+    "name": "dihalbino/composer-classmap",
+    "require": {},
+    "autoload": {
+      "classmap": [
+        "./"
+      ]
+    }
+  }
+  
+  

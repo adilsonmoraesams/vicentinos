@@ -1,0 +1,29 @@
+
+
+
+// Listar Clientes
+GET http://localhost:80/server/clientes HTTP/1.1
+content-type: application/json
+Authorization: Basic cm9vdDoxMjM=
+
+
+###
+
+
+// Consulta Clientes id
+GET http://localhost:80/server/clientes/13?a=1&sss=2 HTTP/1.1
+content-type: application/json
+Authorization: Basic cm9vdDoxMjM=
+
+
+###
+
+// Cadastrar Cliente
+POST http://localhost:80/server/clientes/cadastrar HTTP/1.1
+content-type: application/json
+Authorization: Basic cm9vdDoxMjM=
+
+{
+    "nome": "Novo nome",
+    "datanascimento": "01/01/1990"
+}
