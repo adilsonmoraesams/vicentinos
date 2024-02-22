@@ -26,9 +26,47 @@ class Authenticate
         switch ($this->tipo) {
             case EnumTypeAuth::Basic:
                 $this->Basic();
+            case EnumTypeAuth::Bearer:
+                $this->Bearer();
         }
     }
 
+
+    public function Bearer()
+    {
+        try {
+            $headers = null;
+            if (isset($_SERVER['Authorization'])) {
+                $headers = trim($_SERVER["Authorization"]);
+            } else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
+                $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
+            } elseif (function_exists('apache_request_headers')) {
+                $requestHeaders = apache_request_headers();
+                // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)
+                $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+                //print_r($requestHeaders);
+                if (isset($requestHeaders['Authorization'])) {
+                    $headers = trim($requestHeaders['Authorization']);
+                }
+            }
+
+
+            // HEADER: Get the access token from the header
+            if (!empty($headers)) {
+                if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+
+                    $decode =  JWT::decode($matches[1], $_ENV["SECRET_KEY"]);
+                    if ($decode) {
+                        $_SESSION["logado"] = $decode;
+                    }
+                } else {
+                    throw new \Exception('Token não informado ou inválido.');
+                }
+            }
+        } catch (Exception $e) {
+            return Response::HttpResponseErrorNotAuthorized($e->getMessage());
+        }
+    }
 
     public function Basic()
     {
@@ -87,8 +125,9 @@ class EnumTypeAuth
 }
 
 
-class EnumProtect 
+class EnumProtect
 {
+    const NoAuth = 0;
     const Private = 1;
     const Public = 2;
 }

@@ -79,5 +79,5 @@ class Response
         $array = array("code" => 401, "status" => false, "message" => $message);
         echo json_encode($array);
         die();
-    }
+    } 
 }

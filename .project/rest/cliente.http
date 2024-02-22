@@ -1,10 +1,28 @@
 
 
 
+
+// Login
+POST http://localhost:80/server/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "adilsonmoraes.ams@gmail.com",
+    "senha": "123456"
+}
+
+
+
+
+
+
+
+################################################################
+
 // Listar Clientes
 GET http://localhost:80/server/clientes HTTP/1.1
 content-type: application/json
-Authorization: Basic cm9vdDoxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJOb21lIjoiQWRpbHNvbiBNIiwiRW1haWwiOiJhZGlsc29ubW9yYWVzLmFtc0BnbWFpbC5jb20iLCJTZW5oYSI6IiJ9.9oG5IGU2iuPK_qTUqT0HRrVG3_kS379HMq0INyWA1Xc
 
 
 ###
@@ -13,7 +31,7 @@ Authorization: Basic cm9vdDoxMjM=
 // Consulta Clientes id
 GET http://localhost:80/server/clientes/13?a=1&sss=2 HTTP/1.1
 content-type: application/json
-Authorization: Basic cm9vdDoxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJOb21lIjoiQWRpbHNvbiBNIiwiRW1haWwiOiJhZGlsc29ubW9yYWVzLmFtc0BnbWFpbC5jb20iLCJTZW5oYSI6IiJ9.mAG-J6ckQPXPt_y1VSd-cnUhL_5xhuYDBnvl2TiW_ho
 
 
 ###
@@ -21,9 +39,11 @@ Authorization: Basic cm9vdDoxMjM=
 // Cadastrar Cliente
 POST http://localhost:80/server/clientes/cadastrar HTTP/1.1
 content-type: application/json
-Authorization: Basic cm9vdDoxMjM=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJOb21lIjoiQWRpbHNvbiBNIiwiRW1haWwiOiJhZGlsc29ubW9yYWVzLmFtc0BnbWFpbC5jb20iLCJTZW5oYSI6IiJ9.9oG5IGU2iuPK_qTUqT0HRrVG3_kS379HMq0INyWA1Xc
 
 {
     "nome": "Novo nome",
     "datanascimento": "01/01/1990"
 }
+
+
