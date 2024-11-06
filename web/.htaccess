@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Permite apenas arquivos de imagem dentro de "public/uploads/capa/"
+RewriteCond %{REQUEST_URI} ^/public/uploads/capa/ [NC]
+RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif)$ [NC]
+RewriteRule .* - [L]
+
+# Se o arquivo ou diretório não existir, redireciona para index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [QSA,L]
